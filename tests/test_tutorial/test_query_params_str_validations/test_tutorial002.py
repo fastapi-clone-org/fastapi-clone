@@ -44,6 +44,15 @@ def test_query_params_str_validations_q_query(client: TestClient):
     }
 
 
+def test_query_params_str_validations_q_max_length_boundary(client: TestClient):
+    response = client.get("/items/", params={"q": "q" * 50})
+    assert response.status_code == 200
+    assert response.json() == {
+        "items": [{"item_id": "Foo"}, {"item_id": "Bar"}],
+        "q": "q" * 50,
+    }
+
+
 def test_query_params_str_validations_q_too_long(client: TestClient):
     response = client.get("/items/", params={"q": "q" * 51})
     assert response.status_code == 422
