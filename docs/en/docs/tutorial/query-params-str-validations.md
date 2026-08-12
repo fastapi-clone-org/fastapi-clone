@@ -265,6 +265,16 @@ The interactive API docs will update accordingly, to allow multiple values:
 
 <img src="/img/tutorial/query-params-str-validations/image02.png">
 
+## Reuse validation metadata { #reuse-validation-metadata }
+
+If more than one path operation accepts the same query parameter, you can define the validation metadata once and reuse it.
+
+For example, you can create a reusable optional search query parameter that has both minimum and maximum length validation:
+
+{* ../../docs_src/query_params_str_validations/tutorial016_an_py310.py *}
+
+Both path operations use the same `q` parameter definition. The client can still omit `q`, but when a value is provided, FastAPI applies the same validation rules in each place.
+
 ### Query parameter list / multiple values with defaults { #query-parameter-list-multiple-values-with-defaults }
 
 You can also define a default `list` of values if none are provided:
