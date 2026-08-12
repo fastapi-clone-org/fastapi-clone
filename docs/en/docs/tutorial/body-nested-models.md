@@ -108,7 +108,7 @@ The string will be checked to be a valid URL, and documented in JSON Schema / Op
 
 You can also use Pydantic models as subtypes of `list`, `set`, etc.:
 
-{* ../../docs_src/body_nested_models/tutorial006_py310.py hl[18] *}
+{* ../../docs_src/body_nested_models/tutorial006_py310.py hl[19] *}
 
 This will expect (convert, validate, document, etc.) a JSON body like:
 
@@ -126,7 +126,8 @@ This will expect (convert, validate, document, etc.) a JSON body like:
     "images": [
         {
             "url": "http://example.com/baz.jpg",
-            "name": "The Foo live"
+            "name": "The Foo live",
+            "caption": "The Foo live from stage"
         },
         {
             "url": "http://example.com/dave.jpg",
@@ -140,13 +141,15 @@ This will expect (convert, validate, document, etc.) a JSON body like:
 
 Notice how the `images` key now has a list of image objects.
 
+Each image can also include optional caption metadata without making that field required.
+
 ///
 
 ## Deeply nested models { #deeply-nested-models }
 
 You can define arbitrarily deeply nested models:
 
-{* ../../docs_src/body_nested_models/tutorial007_py310.py hl[7,12,18,21,25] *}
+{* ../../docs_src/body_nested_models/tutorial007_py310.py hl[7,13,19,22,26] *}
 
 /// note
 

@@ -7,6 +7,7 @@ app = FastAPI()
 class Image(BaseModel):
     url: HttpUrl
     name: str
+    caption: str | None = None
 
 
 class Item(BaseModel):

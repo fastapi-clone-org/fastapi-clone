@@ -36,6 +36,7 @@ def test_post_all(client: TestClient):
                     {
                         "url": "http://example.com/image.png",
                         "name": "example image",
+                        "caption": "Front view",
                     }
                 ],
             }
@@ -64,6 +65,7 @@ def test_put_only_required(client: TestClient):
                         {
                             "url": "http://example.com/image.png",
                             "name": "example image",
+                            "caption": None,
                         }
                     ],
                 }
@@ -236,6 +238,10 @@ def test_openapi_schema(client: TestClient):
                             "name": {
                                 "title": "Name",
                                 "type": "string",
+                            },
+                            "caption": {
+                                "title": "Caption",
+                                "anyOf": [{"type": "string"}, {"type": "null"}],
                             },
                         },
                         "required": ["url", "name"],
