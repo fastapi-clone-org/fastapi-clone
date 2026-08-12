@@ -66,6 +66,21 @@ def test_patch_name(client: TestClient):
     }
 
 
+def test_patch_preserves_unset_tags(client: TestClient):
+    response = client.patch(
+        "/items/qux",
+        json={"description": "Updated item description"},
+    )
+    assert response.status_code == 200, response.text
+    assert response.json() == {
+        "name": "Qux",
+        "description": "Updated item description",
+        "price": 29.5,
+        "tax": 8.5,
+        "tags": ["stored", "sample"],
+    }
+
+
 def test_openapi_schema(client: TestClient):
     response = client.get("/openapi.json")
     assert response.status_code == 200, response.text
