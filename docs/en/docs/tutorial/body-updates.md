@@ -52,6 +52,10 @@ Like `item.model_dump(exclude_unset=True)`.
 
 That would generate a `dict` with only the data that was set when creating the `item` model, excluding default values.
 
+So if a client sends only `description` in the request body, stored fields such as
+`tags` will keep their current value instead of being replaced by the model
+default.
+
 Then you can use this to generate a `dict` with only the data that was set (sent in the request), omitting default values:
 
 {* ../../docs_src/body_updates/tutorial002_py310.py hl[32] *}
