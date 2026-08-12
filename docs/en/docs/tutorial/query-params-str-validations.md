@@ -69,6 +69,8 @@ Now that we have this `Annotated` where we can put more information (in this cas
 
 Notice that the default value is still `None`, so the parameter is still optional.
 
+That validation is applied when the client provides a value for `q`. If the client doesn't send `q`, the default value is still `None`, and the parameter remains optional.
+
 But now, having `Query(max_length=50)` inside of `Annotated`, we are telling FastAPI that we want it to have **additional validation** for this value, we want it to have maximum 50 characters. 😎
 
 /// tip
@@ -121,6 +123,8 @@ q: str | None = Query(default=None, max_length=50)
 ```
 
 This will validate the data, show a clear error when the data is not valid, and document the parameter in the OpenAPI schema *path operation*.
+
+The same optional behavior still applies here: FastAPI validates `q` when it is included in the request, but the client can omit it because the default value is `None`.
 
 ### `Query` as the default value or in `Annotated` { #query-as-the-default-value-or-in-annotated }
 
