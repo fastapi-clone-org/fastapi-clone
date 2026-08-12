@@ -186,13 +186,15 @@ Now you know that whenever you need them you can use them in **FastAPI**.
 
 You can, of course, use default values other than `None`.
 
-Let's say that you want to declare the `q` query parameter to have a `min_length` of `3`, and to have a default value of `"fixedquery"`:
+Let's say that you want to declare the `q` query parameter to have a `min_length` of `3`, a `max_length` of `50`, and a default value of `"fixedquery"`:
 
 {* ../../docs_src/query_params_str_validations/tutorial005_an_py310.py hl[9] *}
 
 /// note
 
 Having a default value of any type, including `None`, makes the parameter optional (not required).
+
+If the client doesn't send `q`, FastAPI uses `"fixedquery"`. If the client sends a value, that value is still validated with the declared length constraints.
 
 ///
 
