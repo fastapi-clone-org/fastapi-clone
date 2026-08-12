@@ -55,6 +55,22 @@ def test_query_params_str_validations_q_short(client: TestClient):
     }
 
 
+def test_query_params_str_validations_q_too_long(client: TestClient):
+    response = client.get("/items/", params={"q": "q" * 51})
+    assert response.status_code == 422
+    assert response.json() == {
+        "detail": [
+            {
+                "type": "string_too_long",
+                "loc": ["query", "q"],
+                "msg": "String should have at most 50 characters",
+                "input": "q" * 51,
+                "ctx": {"max_length": 50},
+            }
+        ]
+    }
+
+
 def test_openapi_schema(client: TestClient):
     response = client.get("/openapi.json")
     assert response.status_code == 200, response.text
@@ -88,8 +104,9 @@ def test_openapi_schema(client: TestClient):
                                 "required": False,
                                 "schema": {
                                     "type": "string",
-                                    "default": "fixedquery",
                                     "minLength": 3,
+                                    "maxLength": 50,
+                                    "default": "fixedquery",
                                     "title": "Q",
                                 },
                                 "name": "q",
