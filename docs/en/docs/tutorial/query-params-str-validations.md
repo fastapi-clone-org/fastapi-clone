@@ -196,6 +196,19 @@ Having a default value of any type, including `None`, makes the parameter option
 
 ///
 
+When a client doesn't include `q` in the request, FastAPI uses the declared default value, `"fixedquery"`.
+
+For example, a request to `http://localhost:8000/items/` returns:
+
+```JSON
+{
+    "items": [{"item_id": "Foo"}, {"item_id": "Bar"}],
+    "q": "fixedquery"
+}
+```
+
+If the client provides a value, such as `http://localhost:8000/items/?q=searchterm`, that value is used instead of the default.
+
 ## Required parameters { #required-parameters }
 
 When we don't need to declare more validations or metadata, we can make the `q` query parameter required just by not declaring a default value, like:

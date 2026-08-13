@@ -55,6 +55,16 @@ def test_query_params_str_validations_q_short(client: TestClient):
     }
 
 
+def test_openapi_schema_includes_default_query_value(client: TestClient):
+    response = client.get("/openapi.json")
+    assert response.status_code == 200, response.text
+    parameter = response.json()["paths"]["/items/"]["get"]["parameters"][0]
+    assert parameter["name"] == "q"
+    assert parameter["in"] == "query"
+    assert parameter["required"] is False
+    assert parameter["schema"]["default"] == "fixedquery"
+
+
 def test_openapi_schema(client: TestClient):
     response = client.get("/openapi.json")
     assert response.status_code == 200, response.text
