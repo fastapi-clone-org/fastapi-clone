@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel
 
@@ -27,6 +27,8 @@ async def read_item(item_id: str):
 
 @app.patch("/items/{item_id}")
 async def update_item(item_id: str, item: Item) -> Item:
+    if item_id not in items:
+        raise HTTPException(status_code=404, detail="Item not found")
     stored_item_data = items[item_id]
     stored_item_model = Item(**stored_item_data)
     update_data = item.model_dump(exclude_unset=True)
