@@ -220,6 +220,8 @@ So, when you need to declare a value as required while using `Query`, you can si
 
 {* ../../docs_src/query_params_str_validations/tutorial006_an_py310.py hl[9] *}
 
+If a client omits this required `q` parameter, FastAPI returns a validation error that identifies the missing query parameter. When the client sends a valid value, the same `min_length` validation still applies.
+
 ### Required, can be `None` { #required-can-be-none }
 
 You can declare that a parameter can accept `None`, but that it's still required. This would force clients to send a value, even if the value is `None`.
