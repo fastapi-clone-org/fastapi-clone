@@ -66,6 +66,15 @@ def test_patch_name(client: TestClient):
     }
 
 
+def test_patch_missing_item(client: TestClient):
+    response = client.patch(
+        "/items/missing",
+        json={"name": "Missing"},
+    )
+    assert response.status_code == 404, response.text
+    assert response.json() == {"detail": "Item not found"}
+
+
 def test_openapi_schema(client: TestClient):
     response = client.get("/openapi.json")
     assert response.status_code == 200, response.text
