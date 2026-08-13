@@ -288,6 +288,25 @@ the default of `q` will be: `["foo", "bar"]` and your response will be:
 }
 ```
 
+If the client provides `q` multiple times, FastAPI uses the provided values instead of the default list.
+
+For example, with:
+
+```txt
+http://localhost:8000/items/?q=baz&q=foobar
+```
+
+the response will be:
+
+```JSON
+{
+  "q": [
+    "baz",
+    "foobar"
+  ]
+}
+```
+
 #### Using just `list` { #using-just-list }
 
 You can also use `list` directly instead of `list[str]`:
