@@ -61,6 +61,16 @@ def test_query_params_str_validations_q_fixedquery_too_short(client: TestClient)
     }
 
 
+def test_openapi_marks_q_as_required(client: TestClient):
+    response = client.get("/openapi.json")
+    assert response.status_code == 200, response.text
+    parameter = response.json()["paths"]["/items/"]["get"]["parameters"][0]
+    assert parameter["name"] == "q"
+    assert parameter["in"] == "query"
+    assert parameter["required"] is True
+    assert parameter["schema"]["minLength"] == 3
+
+
 def test_openapi_schema(client: TestClient):
     response = client.get("/openapi.json")
     assert response.status_code == 200, response.text
