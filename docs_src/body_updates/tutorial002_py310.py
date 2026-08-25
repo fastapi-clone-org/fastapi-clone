@@ -21,7 +21,7 @@ items = {
 
 
 @app.get("/items/{item_id}", response_model=Item)
-async def read_item(item_id: str):
+async def read_item(item_id: str) -> Item:
     return items[item_id]
 
 

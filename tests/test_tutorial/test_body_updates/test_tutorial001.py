@@ -45,6 +45,13 @@ def test_put(client: TestClient):
     }
 
 
+def test_get_includes_default_values(client: TestClient):
+    response = client.get("/items/baz")
+    assert response.status_code == 200, response.text
+    assert response.json()["tax"] == 10.5
+    assert response.json()["tags"] == []
+
+
 def test_openapi_schema(client: TestClient):
     response = client.get("/openapi.json")
     assert response.status_code == 200, response.text
