@@ -38,6 +38,19 @@ def test_post_user(client: TestClient):
     }
 
 
+def test_post_user_excludes_password(client: TestClient):
+    response = client.post(
+        "/user/",
+        json={
+            "username": "foo",
+            "password": "fighter",
+            "email": "foo@example.com",
+        },
+    )
+    assert response.status_code == 200, response.text
+    assert "password" not in response.json()
+
+
 def test_openapi_schema(client: TestClient):
     response = client.get("/openapi.json")
     assert response.status_code == 200, response.text
