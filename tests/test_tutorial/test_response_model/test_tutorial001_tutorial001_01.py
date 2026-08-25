@@ -73,6 +73,13 @@ def test_create_item_only_required(client: TestClient):
     }
 
 
+def test_read_items_includes_default_fields(client: TestClient):
+    response = client.get("/items/")
+    assert response.status_code == 200, response.text
+    assert all(item["tags"] == [] for item in response.json())
+    assert all(item["tax"] is None for item in response.json())
+
+
 def test_openapi_schema(client: TestClient):
     response = client.get("/openapi.json")
     assert response.status_code == 200, response.text

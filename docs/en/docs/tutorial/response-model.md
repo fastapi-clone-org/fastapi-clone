@@ -64,6 +64,8 @@ If you declare both a return type and a `response_model`, the `response_model` w
 
 This way you can add correct type annotations to your functions even when you are returning a type different than the response model, to be used by the editor and tools like mypy. And still you can have FastAPI do the data validation, documentation, etc. using the `response_model`.
 
+The response model also ensures that fields not declared for the public response are filtered before data is returned to the client.
+
 You can also use `response_model=None` to disable creating a response model for that *path operation*, you might need to do it if you are adding type annotations for things that are not valid Pydantic fields, you will see an example of that in one of the sections below.
 
 ## Return the same input data { #return-the-same-input-data }
