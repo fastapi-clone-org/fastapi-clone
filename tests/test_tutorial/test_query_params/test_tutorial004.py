@@ -44,6 +44,10 @@ def get_client(request: pytest.FixtureRequest):
             "/users/42/items/baz?short=true",
             {"item_id": "baz", "owner_id": 42},
         ),
+        (
+            "/users/42/items/baz?short=true&q=somequery",
+            {"item_id": "baz", "owner_id": 42, "q": "somequery"},
+        ),
     ],
 )
 def test_read_user_item(client: TestClient, path, expected_json):
