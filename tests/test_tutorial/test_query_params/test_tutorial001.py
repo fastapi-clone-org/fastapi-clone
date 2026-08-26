@@ -33,6 +33,10 @@ def get_client(request: pytest.FixtureRequest):
             "/items/?skip=1&limit=1",
             [{"item_name": "Bar"}],
         ),
+        (
+            "/items/?skip=2",
+            [{"item_name": "Baz"}],
+        ),
     ],
 )
 def test_read_user_item(client: TestClient, path, expected_json):
