@@ -122,6 +122,29 @@ Here, even though our *path operation function* is returning the same input user
 
 So, **FastAPI** will take care of filtering out all the data that is not declared in the output model (using Pydantic).
 
+For example, a client can send a password with a request to `POST /user/`:
+
+```JSON
+{
+    "username": "foo",
+    "password": "fighter",
+    "email": "foo@example.com",
+    "full_name": "Grave Dohl"
+}
+```
+
+The successful response contains only the fields declared by `UserOut`:
+
+```JSON
+{
+    "username": "foo",
+    "email": "foo@example.com",
+    "full_name": "Grave Dohl"
+}
+```
+
+The `password` is accepted as input but is not returned to the API client because it is not part of the response model.
+
 ### `response_model` or Return Type { #response-model-or-return-type }
 
 In this case, because the two models are different, if we annotated the function return type as `UserOut`, the editor and tools would complain that we are returning an invalid type, as those are different classes.

@@ -38,6 +38,20 @@ def test_post_user(client: TestClient):
     }
 
 
+def test_post_user_returns_public_fields(client: TestClient):
+    response = client.post(
+        "/user/",
+        json={
+            "username": "foo",
+            "password": "fighter",
+            "email": "foo@example.com",
+        },
+    )
+    assert response.status_code == 200, response.text
+    assert response.json()["username"] == "foo"
+    assert response.json()["email"] == "foo@example.com"
+
+
 def test_openapi_schema(client: TestClient):
     response = client.get("/openapi.json")
     assert response.status_code == 200, response.text
