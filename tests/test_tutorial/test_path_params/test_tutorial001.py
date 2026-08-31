@@ -12,6 +12,7 @@ client = TestClient(app)
     [
         (1, {"item_id": "1"}),
         ("alice", {"item_id": "alice"}),
+        ("item-42", {"item_id": "item-42"}),
     ],
 )
 def test_get_items(item_id, expected_response):
