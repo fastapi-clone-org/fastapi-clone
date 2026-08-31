@@ -12,6 +12,7 @@ client = TestClient(app)
     [
         ("me", {"user_id": "the current user"}),
         ("alice", {"user_id": "alice"}),
+        ("bob", {"user_id": "bob"}),
     ],
 )
 def test_get_users(user_id: str, expected_response: dict):

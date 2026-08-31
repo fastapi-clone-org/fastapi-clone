@@ -20,6 +20,12 @@ def test_root_file_path():
     assert response.json() == {"file_path": "/home/johndoe/myfile.txt"}
 
 
+def test_nested_file_path():
+    response = client.get("/files/projects/demo/README.md")
+    assert response.status_code == 200, response.text
+    assert response.json() == {"file_path": "projects/demo/README.md"}
+
+
 def test_openapi_schema():
     response = client.get("/openapi.json")
     assert response.status_code == 200, response.text

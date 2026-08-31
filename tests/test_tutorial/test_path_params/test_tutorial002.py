@@ -12,6 +12,12 @@ def test_get_items():
     assert response.json() == {"item_id": 1}
 
 
+def test_get_items_with_another_integer_id():
+    response = client.get("/items/42")
+    assert response.status_code == 200, response.text
+    assert response.json() == {"item_id": 42}
+
+
 def test_get_items_invalid_id():
     response = client.get("/items/item1")
     assert response.status_code == 422, response.text
