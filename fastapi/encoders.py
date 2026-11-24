@@ -31,13 +31,7 @@ from ._compat import (
     is_pydantic_v1_model_instance,
 )
 
-try:
-    # pydantic.color.Color is deprecated since v2.0b3, but supporting for bwd-compat
-    from pydantic.color import Color  # ty: ignore[deprecated]
-except ImportError:  # pragma: no cover
 
-    class Color:  # type: ignore[no-redef]
-        pass
 
 
 try:
