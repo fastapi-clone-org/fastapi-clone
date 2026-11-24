@@ -14,23 +14,6 @@ class EndpointContext(TypedDict, total=False):
     line: int
 
 
-class HTTPException(StarletteHTTPException):
-    """
-    An HTTP exception you can raise in your own code to show errors to the client.
-
-    This is for client errors, invalid authentication, invalid data, etc. Not for server
-    errors in your code.
-
-    Read more about it in the
-    [FastAPI docs for Handling Errors](https://fastapi.tiangolo.com/tutorial/handling-errors/).
-
-    ## Example
-
-    ```python
-    from fastapi import FastAPI, HTTPException
-
-    app = FastAPI()
-
     items = {"foo": "The Foo Wrestlers"}
 
 
@@ -121,20 +104,7 @@ class WebSocketException(StarletteWebSocketException):
         while True:
             data = await websocket.receive_text()
             await websocket.send_text(f"Session cookie is: {session}")
-            await websocket.send_text(f"Message text was: {data}, for item ID: {item_id}")
-    ```
-    """
-
-    def __init__(
-        self,
-        code: Annotated[
-            int,
-            Doc(
-                """
-                A closing code from the
-                [valid codes defined in the specification](https://datatracker.ietf.org/doc/html/rfc6455#section-7.4.1).
-                """
-            ),
+            await w
         ],
         reason: Annotated[
             str | None,

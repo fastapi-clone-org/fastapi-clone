@@ -16,11 +16,6 @@ from ._compat import (
 from .datastructures import _Unset
 
 
-class ParamTypes(Enum):
-    query = "query"
-    header = "header"
-    path = "path"
-    cookie = "cookie"
 
 
 class Param(FieldInfo):  # type: ignore[misc]  # ty: ignore[subclass-of-final-class]
@@ -79,25 +74,7 @@ class Param(FieldInfo):  # type: ignore[misc]  # ty: ignore[subclass-of-final-cl
             )
         self.example = example
         self.include_in_schema = include_in_schema
-        self.openapi_examples = openapi_examples
-        kwargs = dict(
-            default=default,
-            default_factory=default_factory,
-            alias=alias,
-            title=title,
-            description=description,
-            gt=gt,
-            ge=ge,
-            lt=lt,
-            le=le,
-            min_length=min_length,
-            max_length=max_length,
-            discriminator=discriminator,
-            multiple_of=multiple_of,
-            allow_inf_nan=allow_inf_nan,
-            max_digits=max_digits,
-            decimal_places=decimal_places,
-            **extra,
+
         )
         if examples is not None:
             kwargs["examples"] = examples
