@@ -19,42 +19,7 @@ from starlette.datastructures import UploadFile as StarletteUploadFile
 
 
 class UploadFile(StarletteUploadFile):
-    """
-    A file uploaded in a request.
 
-    Define it as a *path operation function* (or dependency) parameter.
-
-    If you are using a regular `def` function, you can use the `upload_file.file`
-    attribute to access the raw standard Python file (blocking, not async), useful and
-    needed for non-async code.
-
-    Read more about it in the
-    [FastAPI docs for Request Files](https://fastapi.tiangolo.com/tutorial/request-files/).
-
-    ## Example
-
-    ```python
-    from typing import Annotated
-
-    from fastapi import FastAPI, File, UploadFile
-
-    app = FastAPI()
-
-
-    @app.post("/files/")
-    async def create_file(file: Annotated[bytes, File()]):
-        return {"file_size": len(file)}
-
-
-    @app.post("/uploadfile/")
-    async def create_upload_file(file: UploadFile):
-        return {"filename": file.filename}
-    ```
-    """
-
-    file: Annotated[
-        BinaryIO,
-        Doc("The standard Python file object (non-async)."),
     ]
     filename: Annotated[str | None, Doc("The original file name.")]
     size: Annotated[int | None, Doc("The size of the file in bytes.")]
